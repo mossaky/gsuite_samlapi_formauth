@@ -6,7 +6,6 @@ G Suiteの認証を利用して、AWSの一時認証情報を取得するスク�
 取得した情報は、~/.aws/credentialsのsamlセクションへ書き出されます。
 
 *** DEMO: ***
-<script type="text/javascript" src="https://asciinema.org/a/cu382jvwzb7cl7p8fic0ignr1.js" id="asciicast-cu382jvwzb7cl7p8fic0ignr1" async></script>
 
 
 ## Requirement
