@@ -1,2 +1,3 @@
 # gsuite_samlapi_formauth
-Get STS for gsuite samlapi auth
+get temporary security token for federation users using saml2.0 with g suite authentication.
+

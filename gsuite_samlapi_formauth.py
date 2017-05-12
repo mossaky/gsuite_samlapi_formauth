@@ -1,7 +1,6 @@
-#! env python
 #
-# Scraping Sample
-#   scraping.py
+#   Get temporary security token for federation
+#   user using saml2.0 with g suite authentication.
 #
 import os
 import sys
@@ -41,8 +40,6 @@ sslverification = True
 
 # idpentryurl: The initial url that starts the authentication process.
 #idpentryurl = 'https://<fqdn>:<port>/idp/profile/SAML2/Unsolicited/SSO?providerId=urn:amazon:webservices'
-#idpentryurl = 'https://accounts.google.com/o/saml2/initsso?idpid=C03fakw2d&spid=11493759999&forceauthn=false'
-idpentryurl = 'https://accounts.google.com/AccountChooser?continue=https://accounts.google.com/o/saml2/initsso?idpid%3DC03fakw2d%26spid%3D11493759999%26forceauthn%3Dfalse%26from_login%3D1%26as%3D6ff994852c3247ed&ltmpl=popup&btmpl=authsub&scc=1&oauth=1'
 
 # Uncomment to enable low level debugging
 logging.basicConfig(level=logging.DEBUG)
@@ -55,9 +52,6 @@ print "Username:",
 username = raw_input()
 password = getpass.getpass()
 print ''
-
-username = "m.okamura@sonicmoov.com"
-password = "K6m4UdZb"
 
 
 # selenium settings
