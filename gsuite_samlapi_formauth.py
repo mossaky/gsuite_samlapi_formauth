@@ -40,9 +40,10 @@ sslverification = True
 
 # idpentryurl: The initial url that starts the authentication process.
 #idpentryurl = 'https://<fqdn>:<port>/idp/profile/SAML2/Unsolicited/SSO?providerId=urn:amazon:webservices'
+idpentryurl = 'https://accounts.google.com/AccountChooser?continue=https://accounts.google.com/o/saml2/initsso?idpid%3DC03fakw2d%26spid%3D11493759999%26forceauthn%3Dfalse%26from_login%3D1%26as%3D6ff994852c3247ed&ltmpl=popup&btmpl=authsub&scc=1&oauth=1'
 
 # Uncomment to enable low level debugging
-logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 ##########################################################################
@@ -61,9 +62,11 @@ driver = webdriver.PhantomJS(service_log_path=os.path.devnull)
 driver.get(idpentryurl)
 driver.find_element_by_xpath("//input[@name='Email']").send_keys(username)
 driver.find_element_by_xpath("//input[@id='next']").click()
+# wait for next page.
 time.sleep(2)
 driver.find_element_by_xpath("//input[@name='Passwd']").send_keys(password)
 driver.find_element_by_xpath("//input[@id='signIn']").submit()
+logger.info("get saml response.")
 
 response = driver.page_source.encode('utf-8')
 
@@ -129,9 +132,6 @@ else:
     role_arn = awsroles[0].split(',')[0]
     principal_arn = awsroles[0].split(',')[1]
 
-logger.debug("role_arn: " + role_arn)
-logger.debug("principal_arn: " + principal_arn)
-logger.debug("assertion: " + assertion)
 # Use the assertion to get an AWS STS token using Assume Role with SAML
 conn = boto.sts.connect_to_region(region)
 token = conn.assume_role_with_saml(role_arn, principal_arn, assertion)
